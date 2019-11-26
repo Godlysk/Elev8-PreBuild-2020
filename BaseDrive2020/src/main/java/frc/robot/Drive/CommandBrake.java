@@ -17,6 +17,7 @@ public class CommandBrake extends InstantCommand {
   /**
    * Add your docs here.
    */
+  
   public CommandBrake() {
     super();
     // Use requires() here to declare subsystem dependencies
