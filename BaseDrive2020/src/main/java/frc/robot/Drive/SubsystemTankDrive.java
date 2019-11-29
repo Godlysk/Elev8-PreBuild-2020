@@ -8,8 +8,8 @@
 package frc.robot.Drive;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 /**
@@ -38,8 +38,8 @@ public class SubsystemTankDrive extends Subsystem {
     FL = new WPI_TalonSRX(RobotMap.FL_port);
     BL = new WPI_TalonSRX(RobotMap.BL_port);  
 
-    FR.setInverted(true);
-    BR.setInverted(true);
+    //FR.setInverted(true);
+    //BR.setInverted(true);
   }
 
     
@@ -50,10 +50,28 @@ public class SubsystemTankDrive extends Subsystem {
     BL.set(leftSpeed);
   }
 
-  public void PID_Drive(double yaxis, double zaxis) {
-    drive(0,0);
+  double integral, error, derivative, zerror = 0;
+  double kP = 0.001;
+  double kI = 0.0;
+  double kD = 0.0;
 
-    //TODO: Implement this
+  public void PID_Drive(double yaxis, double zaxis) {
+    /*
+    double navxYawAxisRate = Robot.oi.navx.getRate();
+    double shaftLeftRate = Robot.oi.enc_L.getRate();
+    double shaftRightRate = Robot.oi.enc_R.getRate();
+
+    error = shaftLeftRate - shaftLeftRate;  
+    integral += error;
+    derivative = navxYawAxisRate; 
+
+    double correction = (error * kP) + (integral * kI) + (derivative * kD);
+    left -= correction;
+    right += correction;
+    move(left, right);
+    */
+
+
   }
 
 }

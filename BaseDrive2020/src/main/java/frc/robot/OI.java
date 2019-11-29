@@ -7,7 +7,8 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
+import com.kauailabs.navx.frc.*;
+import edu.wpi.first.wpilibj.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -16,9 +17,14 @@ import edu.wpi.first.wpilibj.Joystick;
 public class OI {
 
   public Joystick joy1;
+  public Encoder enc_R, enc_L;
+  public AHRS navx;
 
   public OI() {
     joy1 = new Joystick(1);
+    enc_R = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
+    enc_L = new Encoder(8, 9, false, Encoder.EncodingType.k4X);
+    navx = new AHRS(SPI.Port.kMXP);
   }
    
 
