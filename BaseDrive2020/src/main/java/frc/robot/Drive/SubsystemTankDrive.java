@@ -9,8 +9,10 @@ package frc.robot.Drive;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.RobotSettings;
 
 /**
  * Add your docs here.
@@ -38,8 +40,8 @@ public class SubsystemTankDrive extends Subsystem {
     FL = new WPI_TalonSRX(RobotMap.FL_port);
     BL = new WPI_TalonSRX(RobotMap.BL_port);  
 
-    //FR.setInverted(true);
-    //BR.setInverted(true);
+    FR.setInverted(true);
+    BR.setInverted(true);
   }
 
     
@@ -50,28 +52,85 @@ public class SubsystemTankDrive extends Subsystem {
     BL.set(leftSpeed);
   }
 
-  double integral, error, derivative, zerror = 0;
-  double kP = 0.001;
-  double kI = 0.0;
-  double kD = 0.0;
 
-  public void PID_Drive(double yaxis, double zaxis) {
-    /*
+  
+  double integral_DriveStraight = 0;
+
+  public void PID_DriveStraight(double yaxis) {
+    
     double navxYawAxisRate = Robot.oi.navx.getRate();
     double shaftLeftRate = Robot.oi.enc_L.getRate();
     double shaftRightRate = Robot.oi.enc_R.getRate();
 
-    error = shaftLeftRate - shaftLeftRate;  
-    integral += error;
-    derivative = navxYawAxisRate; 
+    SmartDashboard.putNumber("Yaw Rate", navxYawAxisRate);
+    SmartDashboard.putNumber("Left Encoder Rate", shaftLeftRate);
+    SmartDashboard.putNumber("Right Encoder Rate", shaftRightRate);
 
-    double correction = (error * kP) + (integral * kI) + (derivative * kD);
-    left -= correction;
-    right += correction;
-    move(left, right);
-    */
+    double error = shaftLeftRate - shaftRightRate;
+    integral_DriveStraight += error;
+    double derivative = navxYawAxisRate; 
 
+    double correction = (error * RobotSettings.kP_DriveStraight);
+    correction += (integral_DriveStraight * RobotSettings.kI_DriveStraight);
+    correction += (derivative * RobotSettings.kD_DriveStraight);
+
+    double left = yaxis - correction;
+    double right = yaxis + correction;
+
+    drive(left*RobotSettings.maxSpeed, right*RobotSettings.maxSpeed );
 
   }
+
+
+
+
+  double integral_PointTurn = 0;
+
+  public void PID_PointTurn(double zaxis) {
+    
+    double navxYawAxisRate = Robot.oi.navx.getRate();
+    double shaftLeftRate = Robot.oi.enc_L.getRate();
+    double shaftRightRate = Robot.oi.enc_R.getRate();
+
+    SmartDashboard.putNumber("Yaw Rate", navxYawAxisRate);
+    SmartDashboard.putNumber("Left Encoder Rate", shaftLeftRate);
+    SmartDashboard.putNumber("Right Encoder Rate", shaftRightRate);
+
+    double error = shaftLeftRate + shaftRightRate;
+    integral_PointTurn += error;
+    double derivative = navxYawAxisRate; 
+
+    double correction = (error * RobotSettings.kP_PointTurn);
+    correction += (integral_PointTurn * RobotSettings.kI_PointTurn);
+    correction += (derivative * RobotSettings.kD_PointTurn);
+
+    double left = (-1 * (zaxis + correction));
+    double right = (zaxis - correction);
+
+    drive(left*RobotSettings.maxSpeed, right*RobotSettings.maxSpeed);
+
+  }
+
+  
+  double integral_SteerDrive = 0;
+
+  public void PID_SteerDrive(double yaxis, double zaxis) {
+    
+    double navxYawAxisRate = Robot.oi.navx.getRate();
+
+    SmartDashboard.putNumber("Yaw Rate", navxYawAxisRate);
+
+    double error = navxYawAxisRate - zaxis*RobotSettings.swerveCoefficient;  
+    integral_SteerDrive += error;
+
+    double correction = (error * RobotSettings.kP_SwerveDrive) + (integral_SteerDrive * RobotSettings.kI_SwerveDrive);
+   
+    double left = yaxis - correction;
+    double right = yaxis + correction;
+    drive(left*RobotSettings.maxSpeed, right*RobotSettings.maxSpeed);
+    
+  }
+
+
 
 }
