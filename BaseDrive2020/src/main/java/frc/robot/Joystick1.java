@@ -13,13 +13,15 @@ import frc.robot.Drive.*;
 
 public class Joystick1 {
 
-    Button commandBrakeButton;
+    Button commandBrakeButton, armMoveUpButton, armMoveDownButton;
 
-    public int brakeButton = 1;
+    public int brakeButton = 1; public int MoveUpButton = 2; public int MoveDownButton = 3;
 
     public Joystick1() {
         commandBrakeButton = new JoystickButton(Robot.oi.joy1, brakeButton);
         commandBrakeButton.whileHeld(new CommandBrake());
+        armMoveUpButton = new JoystickButton(Robot.oi.joy1, MoveUpButton);
+        armMoveDownButton = new JoystickButton(Robot.oi.joy1, MoveDownButton);
     }
 
     
