@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 
 import frc.robot.Drive.*;
 import frc.robot.Arm.*;
-import frc.robot.Arm.VerticalMovement.SubsystemArmVertical;
+// import frc.robot.Arm.VerticalMovement.SubsystemArmVertical;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,7 +26,7 @@ public class Robot extends TimedRobot {
   
   public static OI oi;
   public static SubsystemTankDrive tankDriveSubsystem;
-  public static SubsystemArmVertical armVerticalSubsystem;
+  // public static SubsystemArmVertical armVerticalSubsystem;
   public static Joystick1 joystick1;
 
 
@@ -36,8 +36,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    tankDriveSubsystem = new SubsystemTankDrive();
-    armVerticalSubsystem = new SubsystemArmVertical();
+    // tankDriveSubsystem = new SubsystemTankDrive();
+    // armVerticalSubsystem = new SubsystemArmVertical();
     joystick1 =  new Joystick1();
     oi = new OI();
   }
