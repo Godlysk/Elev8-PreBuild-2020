@@ -11,8 +11,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 import frc.robot.Drive.*;
-import frc.robot.Arm.*;
-// import frc.robot.Arm.VerticalMovement.SubsystemArmVertical;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -36,8 +34,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    // tankDriveSubsystem = new SubsystemTankDrive();
-    // armVerticalSubsystem = new SubsystemArmVertical();
+    tankDriveSubsystem = new SubsystemTankDrive();
     joystick1 =  new Joystick1();
     oi = new OI();
   }

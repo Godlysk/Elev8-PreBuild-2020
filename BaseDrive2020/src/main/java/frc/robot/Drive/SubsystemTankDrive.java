@@ -111,19 +111,14 @@ public class SubsystemTankDrive extends Subsystem {
 
   }
 
-  
-  double integral_SteerDrive = 0;
 
   public void PID_SteerDrive(double yaxis, double zaxis) {
     
     //double navxYawAxisRate = Robot.oi.navx.getRate();
-
     //SmartDashboard.putNumber("Yaw Rate", navxYawAxisRate);
 
     double error = zaxis*RobotSettings.swerveCoefficient;  
-    //integral_SteerDrive += error;
-
-    double correction = (error); //* RobotSettings.kP_SwerveDrive); //+ (integral_SteerDrive * RobotSettings.kI_SwerveDrive);
+    double correction = error; 
    
     double left = yaxis + correction;
     double right = yaxis - correction;

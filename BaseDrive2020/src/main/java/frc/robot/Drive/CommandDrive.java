@@ -28,18 +28,19 @@ public class CommandDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+
     double yaxis = Robot.oi.getY(Robot.oi.joy1, RobotSettings.yDeadband); //Adjusted Y
     double zaxis = Robot.oi.getZ(Robot.oi.joy1, RobotSettings.zDeadband); // Adjusted Z
 
     SmartDashboard.putNumber("Y-AXIS", yaxis);
     SmartDashboard.putNumber("Z-AXIS", zaxis);
-    SmartDashboard.putNumber("Z-AXIS real", Robot.oi.joy1.getZ());
     
+
 
     /*
     if (Math.abs(yaxis) == 0 && Math.abs(zaxis) == 0) {
       // None
-      //Robot.tankDriveSubsystem.drive(0, 0);
+      // Robot.tankDriveSubsystem.drive(0, 0);
     } else {
       if (Math.abs(yaxis) == 0) { 
         // Only Z 
