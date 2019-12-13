@@ -104,8 +104,8 @@ public class SubsystemTankDrive extends Subsystem {
     correction += (integral_PointTurn * RobotSettings.kI_PointTurn);
     correction += (derivative * RobotSettings.kD_PointTurn);
 
-    double left = (-1 * (zaxis + correction));
-    double right = (zaxis - correction);
+    double left = (zaxis + correction);
+    double right = -1 * (zaxis - correction);
 
     drive(left*RobotSettings.maxSpeed, right*RobotSettings.maxSpeed);
 
@@ -116,17 +116,17 @@ public class SubsystemTankDrive extends Subsystem {
 
   public void PID_SteerDrive(double yaxis, double zaxis) {
     
-    double navxYawAxisRate = Robot.oi.navx.getRate();
+    //double navxYawAxisRate = Robot.oi.navx.getRate();
 
-    SmartDashboard.putNumber("Yaw Rate", navxYawAxisRate);
+    //SmartDashboard.putNumber("Yaw Rate", navxYawAxisRate);
 
-    double error = navxYawAxisRate - zaxis*RobotSettings.swerveCoefficient;  
-    integral_SteerDrive += error;
+    double error = zaxis*RobotSettings.swerveCoefficient;  
+    //integral_SteerDrive += error;
 
-    double correction = (error * RobotSettings.kP_SwerveDrive) + (integral_SteerDrive * RobotSettings.kI_SwerveDrive);
+    double correction = (error); //* RobotSettings.kP_SwerveDrive); //+ (integral_SteerDrive * RobotSettings.kI_SwerveDrive);
    
-    double left = yaxis - correction;
-    double right = yaxis + correction;
+    double left = yaxis + correction;
+    double right = yaxis - correction;
     drive(left*RobotSettings.maxSpeed, right*RobotSettings.maxSpeed);
     
   }

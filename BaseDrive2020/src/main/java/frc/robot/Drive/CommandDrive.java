@@ -8,6 +8,7 @@
 package frc.robot.Drive;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotSettings;
 
@@ -21,7 +22,7 @@ public class CommandDrive extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.tankDriveSubsystem.drive(0,0);
+    Robot.tankDriveSubsystem.drive(0, 0);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -30,9 +31,15 @@ public class CommandDrive extends Command {
     double yaxis = Robot.oi.getY(Robot.oi.joy1, RobotSettings.yDeadband); //Adjusted Y
     double zaxis = Robot.oi.getZ(Robot.oi.joy1, RobotSettings.zDeadband); // Adjusted Z
 
+    SmartDashboard.putNumber("Y-AXIS", yaxis);
+    SmartDashboard.putNumber("Z-AXIS", zaxis);
+    SmartDashboard.putNumber("Z-AXIS real", Robot.oi.joy1.getZ());
+    
+
+    /*
     if (Math.abs(yaxis) == 0 && Math.abs(zaxis) == 0) {
       // None
-      Robot.tankDriveSubsystem.drive(0,0);
+      //Robot.tankDriveSubsystem.drive(0, 0);
     } else {
       if (Math.abs(yaxis) == 0) { 
         // Only Z 
@@ -42,10 +49,11 @@ public class CommandDrive extends Command {
         Robot.tankDriveSubsystem.PID_DriveStraight(yaxis);
       } else {
         // Both Z,Y
+    */
         Robot.tankDriveSubsystem.PID_SteerDrive(yaxis, zaxis);
 
-      }
-    }
+      //}
+    //}
       
     //Robot.tankDriveSubsystem.PID_Drive(yaxis, zaxis);
   }

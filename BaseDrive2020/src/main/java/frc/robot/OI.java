@@ -26,7 +26,7 @@ public class OI {
     enc_L = new Encoder(8, 9, false, Encoder.EncodingType.k4X);
     navx = new AHRS(SPI.Port.kMXP);
   }
-   
+ 
 
   public double getY(final Joystick joy, final double band) {
     // Inverted (Joystick moved forwards gives negtive reading)
