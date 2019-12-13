@@ -21,6 +21,8 @@ public class RobotMap {
   public static int BR_port = 4;
   public static int BL_port = 1;
 
+  public static int ArmVertical_port = 5;
+
 
 
   // For example to map the left and right motors, you could define the
