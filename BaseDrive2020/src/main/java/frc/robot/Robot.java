@@ -24,7 +24,6 @@ public class Robot extends TimedRobot {
   
   public static OI oi;
   public static SubsystemTankDrive tankDriveSubsystem;
-  // public static SubsystemArmVertical armVerticalSubsystem;
   public static Joystick1 joystick1;
 
 
@@ -35,8 +34,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     tankDriveSubsystem = new SubsystemTankDrive();
-    joystick1 =  new Joystick1();
     oi = new OI();
+    joystick1 =  new Joystick1();
   }
 
   /**

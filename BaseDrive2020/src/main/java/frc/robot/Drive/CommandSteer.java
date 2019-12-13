@@ -12,11 +12,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotSettings;
 
-public class CommandDrive extends Command {
-  public CommandDrive() {
+
+public class CommandSteer extends Command {
+  public CommandSteer() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.tankDriveSubsystem);
   }
 
   // Called just before this Command runs the first time
@@ -35,25 +35,17 @@ public class CommandDrive extends Command {
     SmartDashboard.putNumber("Z-AXIS", zaxis);
     
     if (!Robot.oi.joy1.getRawButton(Robot.joystick1.brakeButtonNumber)) {
-
-      if (Math.abs(zaxis) > RobotSettings.zTurnThreshold) {
-        Robot.tankDriveSubsystem.PID_PointTurn(zaxis);
-      } else {
-        if (yaxis != 0) Robot.tankDriveSubsystem.PID_DriveStraight(yaxis);
-        else Robot.tankDriveSubsystem.drive(0, 0);
-      }
-
+      Robot.tankDriveSubsystem.PID_SteerDrive(yaxis, zaxis);
     } else {
       Robot.tankDriveSubsystem.drive(0, 0);
     }
-    
-    
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return !Robot.oi.joy1.getRawButton(Robot.joystick1.steerButtonNumber);
   }
 
   // Called once after isFinished returns true
