@@ -20,6 +20,7 @@ public class Joystick1 {
 
     public Joystick1() {
         commandBrakeButton = new JoystickButton(Robot.oi.joy1, brakeButtonNumber);
+        commandBrakeButton.whileHeld(new CommandBrake());
 
         commandSteerButton = new JoystickButton(Robot.oi.joy1, steerButtonNumber);
         commandSteerButton.whenPressed(new CommandSteer());

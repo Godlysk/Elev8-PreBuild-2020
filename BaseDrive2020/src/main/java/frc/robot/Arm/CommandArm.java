@@ -5,19 +5,17 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.Drive;
+package frc.robot.Arm;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotSettings;
 
-
-public class CommandSteer extends Command {
-  public CommandSteer() {
+public class CommandArm extends Command {
+  public CommandArm() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.tankDriveSubsystem);
+    requires(Robot.armSubsystem); 
   }
 
   // Called just before this Command runs the first time
@@ -29,20 +27,16 @@ public class CommandSteer extends Command {
   @Override
   protected void execute() {
 
-    double yaxis = Robot.oi.getY(Robot.oi.joy1, RobotSettings.yDeadband); //Adjusted Y
-    double zaxis = Robot.oi.getZ(Robot.oi.joy1, RobotSettings.zDeadband); // Adjusted Z
+    //double yaxis = Robot.oi.getY(Robot.oi.joy2, RobotSettings.yDeadband); //Adjusted Y
 
-    SmartDashboard.putNumber("Y-AXIS", yaxis);
-    SmartDashboard.putNumber("Z-AXIS", zaxis);
+    //Robot.armSubsystem.move(yaxis * RobotSettings.maxArmSpeed);
     
-    Robot.tankDriveSubsystem.PID_SteerDrive(yaxis, zaxis);
-
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return !Robot.oi.joy1.getRawButton(Robot.joystick1.steerButtonNumber);
+    return false;
   }
 
   // Called once after isFinished returns true

@@ -12,10 +12,10 @@ package frc.robot;
  */
 public class RobotSettings {
 
-    public final static double yDeadband = 0.08;
-    public final static double zDeadband = 0.08;
+    public final static double yDeadband = 0.1;
+    public final static double zDeadband = 0.1;
     public final static double maxSpeed = 0.4;
-    public final static double swerveCoefficient = 0.8;
+    public final static double swerveCoefficient = 0.6;
 
     public final static double kP_DriveStraight = 0.0;
     public final static double kI_DriveStraight = 0.0;
@@ -30,5 +30,7 @@ public class RobotSettings {
     public final static double kD_SwerveDrive = 0.0;
 
     public final static double zTurnThreshold = 0.1;
+    
+    //public final static double maxArmSpeed = 0.4;
 
 }

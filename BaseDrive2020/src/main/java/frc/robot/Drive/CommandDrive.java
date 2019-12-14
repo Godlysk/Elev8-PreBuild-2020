@@ -34,19 +34,12 @@ public class CommandDrive extends Command {
     SmartDashboard.putNumber("Y-AXIS", yaxis);
     SmartDashboard.putNumber("Z-AXIS", zaxis);
     
-    if (!Robot.oi.joy1.getRawButton(Robot.joystick1.brakeButtonNumber)) {
-
-      if (Math.abs(zaxis) > RobotSettings.zTurnThreshold) {
-        Robot.tankDriveSubsystem.PID_PointTurn(zaxis);
-      } else {
-        if (yaxis != 0) Robot.tankDriveSubsystem.PID_DriveStraight(yaxis);
-        else Robot.tankDriveSubsystem.drive(0, 0);
-      }
-
+    if (Math.abs(zaxis) > RobotSettings.zTurnThreshold) {
+      Robot.tankDriveSubsystem.PID_PointTurn(zaxis);
     } else {
-      Robot.tankDriveSubsystem.drive(0, 0);
+      if (yaxis != 0) Robot.tankDriveSubsystem.PID_DriveStraight(yaxis);
+      else Robot.tankDriveSubsystem.drive(0, 0);
     }
-    
     
   }
 

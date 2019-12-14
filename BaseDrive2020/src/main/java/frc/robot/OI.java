@@ -16,14 +16,16 @@ import edu.wpi.first.wpilibj.*;
  */
 public class OI {
 
-  public Joystick joy1;
+  public Joystick joy1, joy2;
   public Encoder enc_R, enc_L;
   public AHRS navx;
 
   public OI() {
     joy1 = new Joystick(1);
-    enc_R = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
-    enc_L = new Encoder(8, 9, false, Encoder.EncodingType.k4X);
+    //joy2 = new Joystick(2);
+
+    enc_L = new Encoder(0, 1, true, Encoder.EncodingType.k4X);
+    enc_R = new Encoder(8, 9, false, Encoder.EncodingType.k4X);
     navx = new AHRS(SPI.Port.kMXP);
   }
  
