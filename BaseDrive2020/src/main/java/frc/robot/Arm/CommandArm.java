@@ -27,9 +27,8 @@ public class CommandArm extends Command {
   @Override
   protected void execute() {
 
-    //double yaxis = Robot.oi.getY(Robot.oi.joy2, RobotSettings.yDeadband); //Adjusted Y
-
-    //Robot.armSubsystem.move(yaxis * RobotSettings.maxArmSpeed);
+    double yaxis = Robot.oi.getY(Robot.oi.joy2, RobotSettings.yDeadband); //Adjusted Y
+    Robot.armSubsystem.move(yaxis * RobotSettings.maxArmSpeed);
     
   }
 

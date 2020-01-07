@@ -30,7 +30,8 @@ public class RobotSettings {
     public final static double kD_SwerveDrive = 0.0;
 
     public final static double zTurnThreshold = 0.1;
-    
-    //public final static double maxArmSpeed = 0.4;
+    public final static double yawRateConst = 0.5;
+
+    public final static double maxArmSpeed = 1;
 
 }

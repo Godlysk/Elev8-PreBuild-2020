@@ -21,7 +21,7 @@ public class SubsystemArm extends Subsystem {
   VictorSP armMotor;
 
   public SubsystemArm() { 
-    //armMotor = new VictorSP(0);  //Connection to PWM port 0
+    armMotor = new VictorSP(0);  //Connection to PWM port 0
   }
 
 
@@ -29,6 +29,7 @@ public class SubsystemArm extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+
     //setDefaultCommand(new CommandArm());
   }
 

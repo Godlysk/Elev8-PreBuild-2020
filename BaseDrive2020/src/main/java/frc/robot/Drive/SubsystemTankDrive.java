@@ -8,6 +8,7 @@
 package frc.robot.Drive;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
@@ -53,6 +54,8 @@ public class SubsystemTankDrive extends Subsystem {
   }
 
 
+
+
   
   double integral_DriveStraight = 0;
 
@@ -77,9 +80,10 @@ public class SubsystemTankDrive extends Subsystem {
     double left = yaxis - correction;
     double right = yaxis + correction;
 
-    drive(left*RobotSettings.maxSpeed, right*RobotSettings.maxSpeed );
+    drive(left*RobotSettings.maxSpeed, right*RobotSettings.maxSpeed);
 
   }
+
 
 
 
@@ -95,7 +99,7 @@ public class SubsystemTankDrive extends Subsystem {
     SmartDashboard.putNumber("Yaw Rate", navxYawAxisRate);
     SmartDashboard.putNumber("Left Encoder Rate", shaftLeftRate);
     SmartDashboard.putNumber("Right Encoder Rate", shaftRightRate);
-
+    
     double error = shaftLeftRate + shaftRightRate;
     integral_PointTurn += error;
     double derivative = navxYawAxisRate; 
@@ -112,6 +116,9 @@ public class SubsystemTankDrive extends Subsystem {
   }
 
 
+
+
+
   public void PID_SteerDrive(double yaxis, double zaxis) {
     
     //double navxYawAxisRate = Robot.oi.navx.getRate();
@@ -126,6 +133,47 @@ public class SubsystemTankDrive extends Subsystem {
     
   }
 
+
+
+
+
+  // NAV-X only PID (Not tested)
+
+  public void PID_DriveStraight_NavX(double yaxis) {
+
+    double navxYawAxisRate = Robot.oi.navx.getRate();
+    SmartDashboard.putNumber("Yaw Rate", navxYawAxisRate);
+    double error = navxYawAxisRate;
+
+    double correction = (error * RobotSettings.kP_DriveStraight);
+
+    double left = yaxis - correction;
+    double right = yaxis + correction;
+
+    drive(left*RobotSettings.maxSpeed, right*RobotSettings.maxSpeed);
+
+  }
+
+
+
+
+
+
+  public void PID_PointTurn_NavX(double zaxis) {
+    
+    double navxYawAxisRate = Robot.oi.navx.getRate();
+
+    SmartDashboard.putNumber("Yaw Rate", navxYawAxisRate);
+
+    double error = zaxis - (navxYawAxisRate*RobotSettings.yawRateConst);
+    double correction = (error * RobotSettings.kP_PointTurn);
+
+    double left = (zaxis + correction);
+    double right = -1 * (zaxis - correction);
+
+    drive(left*RobotSettings.maxSpeed, right*RobotSettings.maxSpeed);
+
+  }
 
 
 }
